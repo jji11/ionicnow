@@ -1,0 +1,11 @@
+{
+  "index.html": {
+    "href": "index.html",
+    "resources": [
+      "css/ionic.min.css",
+      "js/ionic.bundle.min.js"
+    ],
+    "refer": [],
+    "priority": 0
+  }
+}

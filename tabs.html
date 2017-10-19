@@ -1,0 +1,121 @@
+<html ng-app="ionicApp">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    
+    <title>Tabs Example</title>
+
+   <link href="//code.ionicframework.com/nightly/css/ionic.css" rel="stylesheet">
+    <script src="//code.ionicframework.com/nightly/js/ionic.bundle.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/ionic.min.css"/>
+    <script type="text/javascript" src="js/ionic.bundle.min.js"></script>
+  </head>
+
+  <body ng-controller="all">
+    
+    <ion-nav-bar class="bar-positive">
+      <ion-nav-back-button>
+      </ion-nav-back-button>
+    </ion-nav-bar>
+             
+    <ion-nav-view></ion-nav-view>
+
+
+<script type="text/javascript">
+	var app = angular.module('ionicApp', ['ionic'])
+
+app.config(function($stateProvider, $urlRouterProvider) {
+
+  $stateProvider
+    .state('tabs', {
+      url: "/tab",
+      abstract: true,
+      templateUrl: "templates/tabs.html"
+    })
+    .state('tabs.home', {
+      url: "/home",
+      views: {
+        'home-tab': {
+          templateUrl: "templates/home.html",
+          controller: 'all'
+        }
+      }
+    })
+    .state('tabs.facts', {
+      url: "/facts",
+      views: {
+        'home-tab': {
+          templateUrl: "templates/facts.html"
+        }
+      }
+    })
+    .state('tabs.facts2', {
+      url: "/facts2",
+      views: {
+        'home-tab': {
+          templateUrl: "templates/facts2.html"
+        }
+      }
+    })
+    .state('tabs.about', {
+      url: "/about",
+      views: {
+        'about-tab': {
+          templateUrl: "templates/about.html"
+        }
+      }
+    })
+    .state('tabs.navstack', {
+      url: "/navstack",
+      views: {
+        'about-tab': {
+          templateUrl: "templates/nav-stack.html"
+        }
+      }
+    })
+    .state('tabs.contact', {
+      url: "/contact",
+      views: {
+        'contact-tab': {
+          templateUrl: "templates/contact.html"
+        }
+      }
+    });
+
+
+   $urlRouterProvider.otherwise("/tab/home");
+
+})
+
+.controller("all",function($scope, $ionicActionSheet, $timeout) {
+//
+   // 点击按钮调用方法触发，或一些其他的触发条件
+   $scope.show = function() {
+
+   // 显示上拉菜单
+   var hideSheet = $ionicActionSheet.show({
+     buttons: [
+       { text: '<b>Share</b> This' },
+       { text: 'Move' }
+     ],
+     destructiveText: 'Delete',
+     titleText: 'Modify your album',
+     cancelText: 'Cancel',
+     cancel: function() {
+          // 这里添加取消代码
+        },
+     buttonClicked: function(index) {
+       return true;
+     }
+   });
+
+   // 2秒后再次调用隐藏菜单
+   $timeout(function() {
+     hideSheet();
+   }, 2000);
+
+   };
+});
+</script>
+  </body>
+</html>
